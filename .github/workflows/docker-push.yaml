@@ -11,7 +11,7 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       -
         name: unzip
         run: unzip mysql-5.0.96-linux-x86_64-glibc23-strip.zip
@@ -31,5 +31,6 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v6
         with:
+          context: .
           push: true
-          tags: 5.0.96,5.0
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/mysql:5.0.96
